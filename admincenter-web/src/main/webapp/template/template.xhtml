@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<uib:page xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:p="http://primefaces.org/ui"
+          xmlns:ui="http://java.sun.com/jsf/facelets"
+          xmlns:uib="http://engagepoint.com/uib"
+          xmlns:ui-header="http://java.sun.com/jsf/composite/uibootstrap/components/header"
+          markupType="html5"
+          contentType="text/html"
+          showFooter="false"
+          project="financials"
+          pageTitle="EngagePoint AdminCenter"
+          projectVersion="#{applicationInfo.appBuildNumber}"
+          >
+    
+    <h:outputStylesheet library="css" name="style.css"/>
+    <uib:pageLayout id="pageLayoutId">
+
+        <ui-header:header id="utilityBarContainer"
+                          menuModel="#{topMenu.model}"
+                          showSettings="true"
+                          showSearch="true"
+                          logo="#{resource['gfx/logo.png']}"
+                          linkLogo="#{request.contextPath}">
+        </ui-header:header>
+
+        <uib:pageMenuFacet>
+            <ui:include src="/pages/leftMenu.xhtml"/>
+        </uib:pageMenuFacet>
+
+        <uib:pageBodyFacet>
+            <ui:insert name="page"/>
+        </uib:pageBodyFacet>
+
+
+        
+    </uib:pageLayout>
+</uib:page>

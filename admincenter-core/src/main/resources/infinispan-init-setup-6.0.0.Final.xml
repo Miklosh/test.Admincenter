@@ -1,0 +1,14 @@
+<infinispan
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="urn:infinispan:config:6.0 http://www.infinispan.org/schemas/infinispan-config-6.0.xsd"
+        xmlns="urn:infinispan:config:6.0">
+
+    <default>
+        <persistence passivation="false">
+            <singleFile
+                    location="${property.infinispan.singlecache.location}"
+                    purgeOnStartup="true" />
+        </persistence>
+    </default>
+
+</infinispan>

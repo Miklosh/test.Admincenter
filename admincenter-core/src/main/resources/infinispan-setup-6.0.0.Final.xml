@@ -1,0 +1,31 @@
+<infinispan
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="urn:infinispan:config:6.0 http://www.infinispan.org/schemas/infinispan-config-6.0.xsd"
+        xmlns="urn:infinispan:config:6.0">
+
+    <global>
+         <transport clusterName="${property.infinispan.global.transport.cluster.name}">
+             <properties>
+                 <property name="configurationFile" value="jgroups-tcp.xml"/>
+             </properties>
+         </transport>
+         <shutdown/>
+         <globalJmxStatistics enabled="${property.infinispan.global.jmx.enabled}" allowDuplicateDomains="${property.infinispan.global.jmx.duplicatedomains}"/>
+    </global>
+
+    <default>
+
+        <persistence passivation="false">
+            <singleFile  location="${property.infinispan.singlecache.location}"/>
+        </persistence>
+
+        <jmxStatistics enabled="true"/>
+
+        <clustering mode="${property.infinispan.clustering.mode}">
+            <hash numOwners="${property.infinispan.clustering.hash.owners}"/>
+            <sync/>
+            <l1 enabled="${property.infinispan.clustering.l1.enabled}" lifespan="${property.infinispan.clustering.l1.lifespan}"/>
+        </clustering>
+    </default>
+
+</infinispan>

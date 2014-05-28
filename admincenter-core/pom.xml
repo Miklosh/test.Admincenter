@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>admincenter-parent</artifactId>
+        <groupId>com.engagepoint.admincenter</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>admincenter-core</artifactId>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <infinispan.libraries.scope>compile</infinispan.libraries.scope>
+        <infinispan.dbloader.libraries.scope>compile</infinispan.dbloader.libraries.scope>
+        <infinispan.xml.setup>false</infinispan.xml.setup>
+        <infinispan.preferences.cache.name>preferencesCache</infinispan.preferences.cache.name>
+        <infinispan.preferences.cachemanager.name>preferencesCacheManager</infinispan.preferences.cachemanager.name>
+        <!-- Infinispan Configuration Properties -->
+        <property.infinispan.global.transport.cluster.name>service</property.infinispan.global.transport.cluster.name>
+        <property.infinispan.global.jmx.enabled>true</property.infinispan.global.jmx.enabled>
+        <property.infinispan.global.jmx.duplicatedomains>true</property.infinispan.global.jmx.duplicatedomains>
+        <property.infinispan.singlecache.maxentries>100000</property.infinispan.singlecache.maxentries>
+        <property.infinispan.singlecache.location>/tmp/single1</property.infinispan.singlecache.location>
+        <property.infinispan.clustering.mode>distribution</property.infinispan.clustering.mode>
+        <property.infinispan.clustering.hash.owners>2</property.infinispan.clustering.hash.owners>
+        <property.infinispan.clustering.l1.enabled>true</property.infinispan.clustering.l1.enabled>
+        <property.infinispan.clustering.l1.lifespan>600000</property.infinispan.clustering.l1.lifespan>
+        <property.infinispan.multicast.addr>228.2.3.9</property.infinispan.multicast.addr>
+        <property.infinispan.multicast.port>46655</property.infinispan.multicast.port>
+        <property.infinispan.multicast.ip.ttl>2</property.infinispan.multicast.ip.ttl>
+        <property.infinispan.preferences.eviction.max.entries>1000
+        </property.infinispan.preferences.eviction.max.entries>
+        <property.infinispan.preferences.persistence.flush.lock.timeout>600
+        </property.infinispan.preferences.persistence.flush.lock.timeout>
+        <!-- JGroups Configuration Properties -->
+        <property.jgroups.bind_addr>192.168.32.54</property.jgroups.bind_addr>
+        <property.jgroups.tcp.port>7800</property.jgroups.tcp.port>
+
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.infinispan</groupId>
+            <artifactId>infinispan-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.infinispan</groupId>
+            <artifactId>infinispan-tree</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.core</artifactId>
+            <version>4.3.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <finalName>admincenter-core</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                    <debug>true</debug>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <appendAssemblyId>false</appendAssemblyId>
+                    <filters>
+                        <filter>src/main/resources</filter>
+                    </filters>
+                    <!--<archive>-->
+                        <!--<manifest>-->
+                            <!--<mainClass>com.engagepoint.admincenter.core.infinispan.loader.InitialConfigLoader-->
+                            <!--</mainClass>-->
+                        <!--</manifest>-->
+                    <!--</archive>-->
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <buildDirectory>./target/bundle</buildDirectory>
+                    <instructions>
+                        <Project-Version>${project.version}</Project-Version>
+                        <Bundle-Version>${project.version}</Bundle-Version>
+                    </instructions>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>default-bundle</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>bundle</goal>
+                        </goals>
+
+                        <configuration>
+                            <instructions>
+                                <Bundle-SymbolicName>admincenter-osgi-bundle</Bundle-SymbolicName>
+                                <Bundle-Name>admincenter-osgi-bundle</Bundle-Name>
+                                <Bundle-Activator>com.engagepoint.admincenter.core.OsgiBundleActivator</Bundle-Activator>
+                                <Embed-Dependency>
+                                    service-esb-common,service-esb-model,service-esb-cluster,invocation-constants,infinispan-commons
+                                </Embed-Dependency>
+                                <Embed-Transitive>true</Embed-Transitive>
+                                <Require-Bundle>org.apache.cxf.bundle</Require-Bundle>
+                                <Import-Package>
+                                    *;resolution:=optional,
+                                    META-INF.cxf,
+                                    META-INF.cxf.osgi,
+                                    org.infinispan.commons.util
+                                </Import-Package>
+                                <Export-Package>
+                                    org.infinispan.commons.util
+                                </Export-Package>
+                            </instructions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+
+
+    </build>
+</project>

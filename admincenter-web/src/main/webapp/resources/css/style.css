@@ -1,0 +1,58 @@
+head {
+    display: table;
+}
+
+.ui-tree .ui-tree-selectable .ui-treenode-label, .ui-tree .ui-treenode-icon{
+    cursor: pointer;
+    vertical-align: top;
+}
+
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight{
+    border-radius: 3px;
+    background: #f3872d;
+    border: 0 none;
+    color: #ffffff;
+}
+
+
+.ui-datatable .ui-datatable-tablewrapper .ui-widget-content.ui-datatable-odd > td {
+
+    background: none !important;
+}
+
+.ui-datatable .ui-datatable-tablewrapper .ui-widget-content.ui-datatable-even > td {
+
+    background: none !important;
+}
+
+.ui-fileupload {
+    display: inline-block;
+    width: 100%;
+    position: absolute !important;
+}
+
+.ui-state-hover{
+    border-radius: 3px;
+    background: #2ea8e0;
+    border: 0 none;
+    color: #000000;
+}
+
+.ui-selectonemenu-label{
+    width:100% !important;
+}
+.ui-selectonemenu{
+    width:100% !important;
+}
+
+.data_table {
+    margin-bottom: 10px;
+}
+
+.error {
+    color: #E20000;
+}
+
+.info {
+    color: green;
+}
