@@ -247,12 +247,12 @@
         </dependencies>
     </dependencyManagement>
 
-	<scm>
-        <connection>scm:git:ssh://git@192.168.32.45:engagepoint/admincenter.git</connection>
-        <developerConnection>scm:git:ssh://git@192.168.32.45:engagepoint/admincenter.git</developerConnection>
-        <url>http://192.168.32.45/engagepoint/admincenter.git</url>
-        <tag>HEAD</tag>
-    </scm>
+	<!--<scm>-->
+        <!--<connection>scm:git:ssh://git@192.168.32.45:engagepoint/admincenter.git</connection>-->
+        <!--<developerConnection>scm:git:ssh://git@192.168.32.45:engagepoint/admincenter.git</developerConnection>-->
+        <!--<url>http://192.168.32.45/engagepoint/admincenter.git</url>-->
+        <!--<tag>HEAD</tag>-->
+    <!--</scm>-->
 
     <distributionManagement>
         <!-- use the following if you're not using a snapshot version. -->
